@@ -1,8 +1,8 @@
-from sqlalchemy import (Column, ForeignKey, Integer, String, create_engine)
+from sqlalchemy import Column, ForeignKey, Integer, String, create_engine
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine("postgres://postgres:pass123@localhost:5432/project_tracker")
+engine = create_engine('postgresql+psycopg2://postgres:postgres@localhost:5432/project_tracker')
 
 Base = declarative_base()
 
