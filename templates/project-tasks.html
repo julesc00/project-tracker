@@ -8,16 +8,20 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Project {{ project_id }}</h1>
+    <h1>Project {{ project.title }}</h1>
 
     <ul>
-        <li>Task 1</li>
-        <li>Task 2</li>
-        <li>Task 3</li>
+        {% for task in tasks %}
+            <li>{{ task.description }}</li>
+            <form action="/delete/task/{{ task.task_id }}" method="POST">
+                <input type="submit" value="Delete Task">
+            </form>
+
+        {% endfor %}
     </ul>
 
     <h3>Add New Task</h3>
-    <form action="/add/task/{{ project_id }}" method="POST">
+    <form action="/add/task/{{ project.project_id }}" method="POST">
         <div>
             Task: <label>
             <input type="text" name="task-description">
@@ -26,5 +30,12 @@
         <br>
         <input type="submit" value="Add Task">
     </form>
+
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+        <div style="color: {{ category }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+
 </body>
 </html>

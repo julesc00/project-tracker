@@ -11,9 +11,16 @@
     <h1>Projects</h1>
 
     <ul>
-        <li><a href="/project/1">Project 1</a></li>
-        <li><a href="/project/2">Project 2</a></li>
-        <li><a href="/project/3">Project 3</a></li>
+        {% for project in projects %}
+        <li
+                style="color: grey">
+            <a
+                    style="text-decoration: none; color: grey"
+                    href="/project/{{ project.project_id }}">
+                {{ project.title }}
+            </a>
+        </li>
+        {% endfor %}
     </ul>
     <br>
     <h3>Add New Project</h3>
@@ -27,5 +34,8 @@
         <input type="submit" value="Add Project">
     </form>
 
+    {% for category, message in get_flashed_messages(with_categories=true)  %}
+        <div style="color: {{ category }}">{{ message }}</div>
+    {% endfor %}
 </body>
 </html>
