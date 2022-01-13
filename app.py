@@ -14,6 +14,8 @@ class Project(db.Model):
     project_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(length=50))
 
+    task = db.relationship("Task", cascade="all, delete-orphan")
+
 
 class Task(db.Model):
     __tablename__ = "tasks"
@@ -51,6 +53,16 @@ def add_project():
         db.session.add(project)
         db.session.commit()
         flash("Project added successfully", "green")
+
+    return redirect(url_for("show_projects"))
+
+
+@app.route("/delete/project/<project_id>", methods=["POST"])
+def delete_project(project_id):
+    """Delete a project."""
+    project = Project.query.filter_by(project_id=project_id).first()
+    db.session.delete(project)
+    db.session.commit()
 
     return redirect(url_for("show_projects"))
 

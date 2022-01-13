@@ -12,7 +12,8 @@
 
     <ul>
         {% for task in tasks %}
-            <li>{{ task.description }}</li>
+
+            <li style="margin-bottom: 1em;">{{ task.description }}</li>
             <form action="/delete/task/{{ task.task_id }}" method="POST">
                 <input type="submit" value="Delete Task">
             </form>
